@@ -1,0 +1,120 @@
+@import "./vars.scss";
+// app global css in SCSS form
+// @import url('https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@200;300;400;500;700;900&display=swap');
+
+
+html {
+  font-size: 18px;
+  color: $black-text;  
+  input { font-size: 18px; }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin: 0;
+    padding: 0;
+    // font-family: "Red Hat Display", sans-serif;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  p {
+    margin: 0;
+    padding: 0;
+    letter-spacing: 0.03125em;
+    margin-bottom: 1rem;
+  }
+
+  div.dark > * { color: $white-text }
+  div.bg-primary > * { color: $white-text }
+}
+
+
+.v-overlay.v-theme--upsettledDarkTheme {
+  .v-overlay {
+    &__scrim {
+      background: linear-gradient(180deg, #6ec9cf 0%, #4badb4 100%) !important;
+      opacity: 0.5 !important;
+    }
+  }
+}
+
+// Google Autocomplete
+.pac-container {
+  z-index: 9999999 !important;
+}
+
+
+.full-height {
+  height: 100vh;
+  width: 100vw;
+}
+
+.upsettled-gradient-background {
+  background: linear-gradient(180deg, #6ec9cf 0%, #4badb4 100%) !important;
+
+  &--dark {
+    background: linear-gradient(180deg, #215c5d 0%, #292929 100%) !important;
+  }
+}
+
+.fade-slide-y-enter-active,
+.fade-slide-y-leave-active {
+  transition: opacity 400ms ease-in-out, transform 300ms ease;
+}
+
+// .fade-slide-y-enter-active {
+//   transition-delay: 100ms;
+// }
+
+.fade-slide-y-enter-from {
+  opacity: 0;
+  transform: translateY(-100px);
+}
+
+.fade-slide-y-enter-to {
+  opacity: 1;
+  transform: translateY(0px);
+}
+
+.fade-slide-y-leave-from {
+  opacity: 1;
+  transform: translateY(0px);
+}
+
+.fade-slide-y-leave-to {
+  opacity: 0;
+  transform: translateY(100px);
+}
+
+// Fade on spot
+.fade-on-spot-enter-active,
+.fade-on-spot-leave-active {
+  transition: opacity 150ms ease-in-out;
+}
+
+// .fade-on-spot-enter-active {
+//   transition-delay: 100ms;
+// }
+
+.fade-on-spot-enter-from,
+.fade-on-spot-leave-to {
+  opacity: 0;
+}
+
+.fade-on-spot-leave-from,
+.fade-on-spot-enter-to {
+  opacity: 1;
+}
+
+
+.k-border {
+  @include k-border;
+}
+
+.k-border-debug {
+  @include k-border-debug;
+
+  background-color: $dandy;
+}

@@ -1,85 +1,54 @@
-<script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
-
-  <RouterView />
+  <div :class="themeClass">
+    <router-view v-slot="{ Component }">
+      <transition name="fade-on-spot" mode="out-in">
+        <component :is="Component" />
+      </transition>
+    </router-view>
+  </div>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
+<script setup lang="ts">
+import { RouterView, useRouter, useRoute } from 'vue-router'
+import { onMounted, computed } from 'vue'
+import { useSessionStore } from './stores/sessionStore'
+import { useTheme } from 'vuetify/lib/framework.mjs'
+import useLocalSession from './composables/useLocalSession'
+import useInitializeCurrentUserAccount from './composables/initializers/useInitializeCurrentUserAccount'
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
+const darkMode = computed(() => useTheme().global.current.value.dark)
+const themeClass = computed(() => {
+  const className = darkMode.value
+    ? 'upsettled-gradient-background--dark dark'
+    : 'upsettled-gradient-background'
+  return className
+})
+const router = useRouter()
+const route = useRoute()
+const sessionStore = useSessionStore()
 
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
+onMounted(async () => {
+  console.log('sessionExpired', route.query.sessionExpired)
+  if (route.query.sessionExpired == 'true') {
+    await clearSession()
+    router.push('/auth/signin')
+  } else {
+    if (sessionStore.sessionCsrf) return
+    const localCsrf = localStorage.getItem('csrf')
+    if (localCsrf) {
+      reinitializeLoggedInUser(localCsrf)
+      if (route.path == '/') router.push('/welcome')
+    } else {
+      router.push('/auth/signin')
+    }
   }
+})
 
-  .logo {
-    margin: 0 2rem 0 0;
-  }
+const localSession = useLocalSession()
+const clearSession = async () => localSession.populateLocalSession(null)
 
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
+const reinitializeLoggedInUser = async (csrf: string): Promise<void> => {
+  await sessionStore.setSessionCsrf(csrf)
+  await useInitializeCurrentUserAccount()
 }
-</style>
+</script>
