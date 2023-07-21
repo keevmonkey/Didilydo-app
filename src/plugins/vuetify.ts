@@ -33,13 +33,13 @@ const didilydoLightTheme: ThemeDefinition = {
   colors: {
     background: '#e6ccbeff',
     surface: '#e6ccbeff',
-    primary: '#A07178', 'primary-darken-1': '#7A5258',
+    primary: '#5C3582', 'primary-darken-1': '#2B193D',
     secondary: '#858AAD', 'secondary-darken-1': '#484D6D',
     error: '#f87266',
     info: '#6a49f6',
     success: '#6fae30',
     warning: '#efa937',
-    accent: '#57a2db'
+    accent: '#7EC9BB'
   }
 }
 
@@ -64,9 +64,9 @@ export default createVuetify({
   components,
   directives,
   defaults: {
-    VCard: {
-      elevation: '6'
-    },
+    // VCard: {
+    //   elevation: '6'
+    // },
   },
   icons: {
     defaultSet: 'mdi',
