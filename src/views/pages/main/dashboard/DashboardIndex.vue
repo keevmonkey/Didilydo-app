@@ -2,7 +2,6 @@
   <div>
     <v-card>
       <v-card-title> This will be the main dashboard page </v-card-title>
-
       <v-card-text>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil temporibus eligendi impedit.
         Ut fugit deserunt corporis nulla nam officiis quibusdam cumque veniam suscipit minima
