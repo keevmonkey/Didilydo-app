@@ -2,14 +2,7 @@
   <v-layout ref="app" class="auth-layout-pages">
     <v-main class="auth-layout-container">
       <v-row>
-        <v-col xs="12" md="7">
-          <v-card>
-            <v-card-title>hello_world from didilydo</v-card-title>
-            <v-card-text> This is a temporary card location </v-card-text>
-          </v-card>
-        </v-col>
-        <!-- <v-col cols="1"/> -->
-        <v-col xs="12" md="5" class="d-flex align-center">
+        <v-col xs="12">
           <router-view v-slot="{ Component }">
             <transition name="fade-on-spot" mode="out-in">
               <component :is="Component" />

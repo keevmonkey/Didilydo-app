@@ -11,13 +11,13 @@ const filterIncluded = (includedPayload, type) =>
 export default async function useInitializeCurrentUserAccount() {
   const { updateCurrentUser } = useCurrentUserStore()
 
-  const api_account_api_v1_current_user_sso_data_path = buildApiPath({
+  const api_v1_current_user_path = buildApiPath({
     controller: 'current_user',
-    action: 'sso_data'
+    action: 'show'
   })
 
   await $securedAxios
-    .get(api_account_api_v1_current_user_sso_data_path)
+    .get(api_v1_current_user_path)
     .then((response) => {
       console.log('fetch current user:', response)
       const currentUserPayload = response.data.data
