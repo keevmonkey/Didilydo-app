@@ -5,7 +5,7 @@
 
 html {
   font-size: 16px;
-  color: $white-text;  
+  color: $grey-text;  
   // color: $black-text;
   input { font-size: 18px; }
   h1,
@@ -53,7 +53,7 @@ html {
 }
 
 .didilydo-gradient-background {
-  background: linear-gradient(180deg, #5A5353 0%, #776274 100%) !important;
+  background: linear-gradient(180deg, #FEFFD6 0%, #FEFFD6 100%) !important;
 
   &--dark {
     background: linear-gradient(180deg, #5A5353 0%, #292929 100%) !important;

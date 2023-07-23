@@ -20,21 +20,13 @@ const myCustomLightTheme: ThemeDefinition = {
   }
 }
 
-
-// /* CSS HEX */
-// --davys-gray: #5a5353ff;
-// --mountbatten-pink: #a07178ff;
-// --pale-dogwood: #e6ccbeff;
-// --chinese-violet: #776274ff;
-// --sage: #c8cc92ff;
-
 const didilydoLightTheme: ThemeDefinition = {
   dark: false,
   colors: {
-    background: '#e6ccbeff',
-    surface: '#e6ccbeff',
-    primary: '#5C3582', 'primary-darken-1': '#2B193D',
-    secondary: '#858AAD', 'secondary-darken-1': '#484D6D',
+    background: '#FEFFD6',
+    surface: '#FEFFD6',
+    primary: '#FFD470', 'primary-darken-1': '#2B193D',
+    secondary: '#E06D06', 'secondary-darken-1': '#484D6D',
     error: '#f87266',
     info: '#6a49f6',
     success: '#6fae30',
