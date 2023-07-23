@@ -102,7 +102,7 @@ const handleRedirection = async () => {
   } else {
     await useInitializeCurrentUserAccount()
     // await useInitializeCurrentUserPortfolioMemberships();
-    router.push({ path: '/welcome' })
+    router.push({ path: '/dashboard' })
   }
 }
 </script>

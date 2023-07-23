@@ -3,7 +3,7 @@
     <template #prepend>
       <v-btn :icon="collapsedMenuButton" @click="toggleCollapse()" />
     </template>
-    <v-app-bar-title>Didilydo</v-app-bar-title>
+    <v-app-bar-title class="text-secondary">Didilydo</v-app-bar-title>
     <template v-slot:append>
       <v-btn icon="mdi-heart"></v-btn>
 
@@ -11,11 +11,13 @@
 
       <v-btn icon>
         <v-icon>mdi-dots-vertical</v-icon>
-        <v-menu activator="parent">
+        <v-menu activator="parent" :close-on-content-click="false">
           <v-list>
             <v-list-item @click="''" title="Account" append-icon="mdi-account" />
             <v-list-item @click="''" title="Settings" append-icon="mdi-cog" />
             <v-list-item class="warning" @click="''" title="Logout" append-icon="mdi-exit-run" />
+
+            <TheSignOutButton />
           </v-list>
         </v-menu>
       </v-btn>
@@ -24,6 +26,7 @@
 </template>
 
 <script setup lang="ts">
+import TheSignOutButton from './TheSignOutButton.vue'
 import { ref, computed } from 'vue'
 
 const collapsedAppBar = ref<boolean>(false)
