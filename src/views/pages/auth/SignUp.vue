@@ -21,6 +21,16 @@
             placeholder="didi@didilydo.com"
           />
           <v-text-field
+            v-model="data.phone_number"
+            :rules="rules.phone_number"
+            label="Phone Number"
+            class="mb-2"
+            variant="outlined"
+            prefix="+60"
+            placeholder="176306779"
+          />
+
+          <v-text-field
             label="Password"
             class="mb-2"
             variant="outlined"
@@ -84,6 +94,10 @@ const checkbox = ref(false)
 const router = useRouter()
 const localSession = useLocalSession()
 const signmeUp = async () => {
+
+  // adjust the value so it adds +60
+  const adjustedPhoneNumber = `+60${data.value.phone_number}`
+  data.value.phone_number = adjustedPhoneNumber
   localSession
     .signUp(data.value)
     .then(() => handleRedirection())
@@ -117,6 +131,7 @@ const validated = computed(() => {
 type SignUpArguments = {
   email: string
   name: string
+  phone_number: string
   password: string
   password_confirmation: string
 }
@@ -124,6 +139,7 @@ type SignUpArguments = {
 const data = ref<SignUpArguments>({
   email: '',
   name: '',
+  phone_number: '',
   password: '',
   password_confirmation: ''
 })
@@ -138,6 +154,7 @@ const rules = {
   password_confirmation: [
     (v: string) => !!v || 'Please input password',
     (v: string) => v == data.value.password || 'Password does not match'
-  ]
+  ],
+  phone_number: [(v: string) => !!v || 'Phone Number is required']
 }
 </script>
