@@ -14,7 +14,7 @@
       <v-list-item v-for="house in houses" :key="house.id">
         <v-list-item-title>{{ house.attributes.name }}</v-list-item-title>
         <template #append>
-          <v-btn variant="text"> Inspect </v-btn>
+          <v-btn variant="text" @click="visitHouse(house)"> Inspect </v-btn>
         </template>
       </v-list-item>
     </v-card>
@@ -40,4 +40,13 @@ import TheHouseForm from '@/components/forms/TheHouseForm.vue'
 const { houses } = storeToRefs(useHousesStore())
 const activateTheHouseForm = ref<boolean>(false)
 const toggleActivateTheHouseForm = () => (activateTheHouseForm.value = !activateTheHouseForm.value)
+
+import { useRouter } from 'vue-router'
+const router = useRouter()
+const visitHouse = (house) => {
+  router.push({
+    name: 'house-dashboard',
+    params: { slug: house.attributes.slug }
+  })
+}
 </script>

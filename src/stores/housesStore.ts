@@ -8,6 +8,7 @@ export const useHousesStore = defineStore('housesStore', () => {
     houses.value = payload
   }
   const addHouse = async (payload: SerializedHouse) => houses.value.push(payload)
+  
 
   // const updateHouses = async (
   //   payload: SerializedHouse | SerializedHouse[],

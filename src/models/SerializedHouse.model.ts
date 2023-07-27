@@ -11,6 +11,7 @@ export type HouseAttributes = {
   description: string
   address: string
   settings: any
+  slug: string
 }
 
 export type HouseLinks = {
