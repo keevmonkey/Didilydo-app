@@ -9,10 +9,14 @@
         <v-icon>mdi-dots-vertical</v-icon>
         <v-menu activator="parent" :close-on-content-click="false">
           <v-list nav>
-            <v-list-item to="/dashboard" title="Dashboard" append-icon="mdi-menu" />
-            <v-list-item to="/tasks" title="Tasks" append-icon="mdi-clipboard-outline" />
+            <v-list-item
+              :to="{ name: 'account-dashboard' }"
+              title="Dashboard"
+              append-icon="mdi-menu"
+            />
+            <v-list-item to="/account/tasks" title="Tasks" append-icon="mdi-clipboard-outline" />
             <v-list-item to="/" title="Account" append-icon="mdi-account" />
-            <v-list-item @click="''" title="Settings" append-icon="mdi-cog" />
+            <v-list-item title="Settings" append-icon="mdi-cog" />
             <TheSignOutButton />
           </v-list>
         </v-menu>

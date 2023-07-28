@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import MainLayout from '@/views/layouts/MainLayout.vue'
 import AuthLayout from '@/views/layouts/AuthLayout.vue'
+import HouseLayout from '@/views/layouts/HouseLayout.vue'
+import AccountLayout from '@/views/layouts/AccountLayout.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -22,36 +23,41 @@ const router = createRouter({
       ]
     },
     {
-      path: '/',
-      component: MainLayout,
+      path: '/house/:slug',
+      component: HouseLayout,
       children: [
         {
           path: 'dashboard',
-          name: 'dashboard',
-          component: () => import('@/views/pages/main/dashboard/DashboardIndex.vue')
+          name: 'house-dashboard',
+          component: () => import('@/views/pages/house/dashboard/DashboardIndex.vue')
+        },
+        {
+          path: 'finances',
+          name: 'house-finances',
+          component: () => import('@/views/pages/house/finances/FinancesIndex.vue')
+        }
+      ]
+    },
+    {
+      path: '/account',
+      component: AccountLayout,
+      children: [
+        {
+          path: 'dashboard',
+          name: 'account-dashboard',
+          component: () => import('@/views/pages/account/dashboard/DashboardIndex.vue')
         },
         {
           path: 'tasks',
-          name: 'tasks',
-          component: () => import('@/views/pages/main/tasks/TasksIndex.vue')
-        },
-        {
-          path: 'houses/:slug',
-          component: () => import('@/views/pages/main/house/HouseIndex.vue'),
-          children: [
-            {
-              path: 'dashboard',
-              name: 'house-dashboard',
-              component: () => import('@/views/pages/main/house/dashboard/DashboardIndex.vue')
-            },
-            {
-              path: 'finances',
-              name: 'house-finances',
-              component: () => import('@/views/pages/main/house/finances/FinancesIndex.vue')
-            }
-          ]
+          name: 'account-tasks',
+          component: () => import('@/views/pages/account/tasks/TasksIndex.vue')
         }
       ]
+    },
+    {
+      path: '/',
+      name: 'select-an-app',
+      component: () => import('@/views/pages/main/SelectAnApp.vue')
     },
     {
       path: '/:catchAll(.*)*',

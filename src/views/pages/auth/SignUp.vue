@@ -94,7 +94,6 @@ const checkbox = ref(false)
 const router = useRouter()
 const localSession = useLocalSession()
 const signmeUp = async () => {
-
   // adjust the value so it adds +60
   const adjustedPhoneNumber = `+60${data.value.phone_number}`
   data.value.phone_number = adjustedPhoneNumber
@@ -110,7 +109,7 @@ const handleRedirection = async () => {
   } else {
     await useInitializeCurrentUserAccount()
     // await useInitializeCurrentUserPortfolioMemberships();
-    router.push({ path: '/dashboard' })
+    router.push({ path: '/account/dashboard' })
   }
 }
 
