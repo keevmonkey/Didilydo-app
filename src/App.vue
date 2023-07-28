@@ -36,8 +36,8 @@ onMounted(async () => {
     if (sessionStore.sessionCsrf) return
     const localCsrf = localStorage.getItem('csrf')
     if (localCsrf) {
-      reinitializeLoggedInUser(localCsrf)
-      if (route.path == '/') router.push('/account/dashboard')
+      await reinitializeLoggedInUser(localCsrf)
+      handleDefaultAppRedirection()
     } else {
       router.push('/auth/signin')
     }
@@ -50,5 +50,22 @@ const clearSession = async () => localSession.populateLocalSession(null)
 const reinitializeLoggedInUser = async (csrf: string): Promise<void> => {
   await sessionStore.setSessionCsrf(csrf)
   await useInitializeCurrentUserAccount()
+}
+
+import { useCurrentUserStore } from './stores/currentUserStore'
+import { storeToRefs } from 'pinia'
+const handleDefaultAppRedirection = async (): Promise<void> => {
+  const { currentUser } = storeToRefs(useCurrentUserStore())
+  if (route.path == '/') {
+    const defaultApp = currentUser.value.attributes.settings.defaultApp
+    if (defaultApp.type == 'account') router.push('/account/dashboard')
+    if (defaultApp.type == 'house')
+      router.push({
+        name: 'house-dashboard',
+        params: {
+          slug: defaultApp.slug
+        }
+      })
+  }
 }
 </script>

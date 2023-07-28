@@ -1,6 +1,7 @@
 <template>
   <div>
     <v-card>
+      hello
       <v-card-title>{{ currentHouseName }}</v-card-title>
       <v-card-text>
         <div>
