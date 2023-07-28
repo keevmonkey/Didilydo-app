@@ -37,7 +37,7 @@ onMounted(async () => {
     const localCsrf = localStorage.getItem('csrf')
     if (localCsrf) {
       reinitializeLoggedInUser(localCsrf)
-      if (route.path == '/') router.push('/dashboard')
+      if (route.path == '/') router.push('/account/dashboard')
     } else {
       router.push('/auth/signin')
     }
