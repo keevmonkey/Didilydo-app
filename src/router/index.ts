@@ -43,6 +43,11 @@ const router = createRouter({
               path: 'dashboard',
               name: 'house-dashboard',
               component: () => import('@/views/pages/main/house/dashboard/DashboardIndex.vue')
+            },
+            {
+              path: 'finances',
+              name: 'house-finances',
+              component: () => import('@/views/pages/main/house/finances/FinancesIndex.vue')
             }
           ]
         }

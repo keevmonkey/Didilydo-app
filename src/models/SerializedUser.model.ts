@@ -10,6 +10,22 @@ export type UserAttributes = {
   email: string
   name: string
   passwordResetSentAt: string | undefined | null
+  meta: UserMeta | undefined | null
+  settings: UserSettings | undefined | null
+}
+
+export type UserMeta = {
+  failedDestroyAttempts: number
+  failedLoginAttemps: number
+  lastLoggedInOn: string
+  passwordLastResetOn: string
+}
+
+export type UserSettings = {
+  defaultApp: {
+    slug: string | undefined | null
+    type: 'account' | 'house' | null
+  }
 }
 
 export type UserLinks = {
