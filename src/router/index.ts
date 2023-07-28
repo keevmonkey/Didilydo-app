@@ -30,6 +30,27 @@ const router = createRouter({
           name: 'dashboard',
           component: () => import('@/views/pages/main/dashboard/DashboardIndex.vue')
         },
+        {
+          path: 'tasks',
+          name: 'tasks',
+          component: () => import('@/views/pages/main/tasks/TasksIndex.vue')
+        },
+        {
+          path: 'houses/:slug',
+          component: () => import('@/views/pages/main/house/HouseIndex.vue'),
+          children: [
+            {
+              path: 'dashboard',
+              name: 'house-dashboard',
+              component: () => import('@/views/pages/main/house/dashboard/DashboardIndex.vue')
+            },
+            {
+              path: 'finances',
+              name: 'house-finances',
+              component: () => import('@/views/pages/main/house/finances/FinancesIndex.vue')
+            }
+          ]
+        }
       ]
     },
     {

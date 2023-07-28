@@ -19,8 +19,8 @@ import useInitializeCurrentUserAccount from './composables/initializers/useIniti
 const darkMode = computed(() => useTheme().global.current.value.dark)
 const themeClass = computed(() => {
   const className = darkMode.value
-    ? 'upsettled-gradient-background--dark dark'
-    : 'upsettled-gradient-background'
+    ? 'didilydo-gradient-background--dark dark'
+    : 'didilydo-gradient-background'
   return className
 })
 const router = useRouter()
@@ -37,7 +37,7 @@ onMounted(async () => {
     const localCsrf = localStorage.getItem('csrf')
     if (localCsrf) {
       reinitializeLoggedInUser(localCsrf)
-      if (route.path == '/') router.push('/welcome')
+      if (route.path == '/') router.push('/dashboard')
     } else {
       router.push('/auth/signin')
     }
