@@ -66,10 +66,10 @@ const rules = {
   name: [(v: string) => !!v || 'Name is required']
 }
 
-import { useTasksStore } from '@/stores/tasksStore'
-const tasksStore = useTasksStore()
-const { tasks } = tasksStore
 import { storeToRefs } from 'pinia'
+import { useCurrentHouseTasksStore } from '@/stores/currentHouse/tasksStore'
+const currentHouseTasksStore = useCurrentHouseTasksStore()
+const { tasks } = storeToRefs(currentHouseTasksStore)
 import { useCurrentHouseStore } from '@/stores/currentHouse/currentHouseStore'
 const { currentHouseSlug } = storeToRefs(useCurrentHouseStore())
 
@@ -81,7 +81,7 @@ const createATask = () => {
   $securedAxios
     .post(endpoint, params)
     .then((response) => {
-      tasksStore.addNewTask(response.data.data)
+      currentHouseTasksStore.addNewTask(response.data.data)
       // emit('submissionCompleted')
     })
     .catch((error) => {

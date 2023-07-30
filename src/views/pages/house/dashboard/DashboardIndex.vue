@@ -19,7 +19,7 @@ const route = useRoute()
 const houseSlug = computed(() => route.params.slug)
 
 import { storeToRefs } from 'pinia'
-import { useCurrentHouseStore } from '@/stores/currentHouseStore'
+import { useCurrentHouseStore } from '@/stores/currentHouse/currentHouseStore'
 
 const { currentHouse, currentHouseName, currentHouseAvatar } = storeToRefs(useCurrentHouseStore())
 </script>
