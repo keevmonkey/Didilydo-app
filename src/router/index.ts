@@ -35,6 +35,11 @@ const router = createRouter({
           path: 'finances',
           name: 'house-finances',
           component: () => import('@/views/pages/house/finances/FinancesIndex.vue')
+        },
+        {
+          path: 'tasks',
+          name: 'house-tasks',
+          component: () => import('@/views/pages/house/tasks/TasksIndex.vue')
         }
       ]
     },
