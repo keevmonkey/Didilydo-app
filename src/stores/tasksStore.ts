@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 import { SerializedTask } from '@/models/SerializedTask.model'
 import { ref } from 'vue'
 
-export const useTaskStore = defineStore('taskStore', () => {
+export const useTasksStore = defineStore('tasksStore', () => {
   const tasks = ref<SerializedTask[]>()
 
   const addNewTask = async (payload: SerializedTask | undefined) => tasks.value.push(payload)

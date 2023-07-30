@@ -8,7 +8,7 @@
 
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
-import { useCurrentHouseStore } from '@/stores/currentHouseStore'
+import { useCurrentHouseStore } from '@/stores/currentHouse/currentHouseStore'
 
 const { currentHouse, currentHouseName, currentHouseAvatar } = storeToRefs(useCurrentHouseStore())
 </script>

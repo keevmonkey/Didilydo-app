@@ -19,8 +19,5 @@ export type TaskLinks = {
 }
 
 export type TaskRelationships = {
-  tenancies: { data: [] }
-  houses: { data: [] }
-  requestedTasks: { data: [] }
-  ownedTasks: { data: [] }
+  house: { data: {} }
 }
