@@ -27,22 +27,17 @@ const loading = ref<boolean>(true)
 // or use before route enter
 onMounted(async () => {
   loading.value = true
-  await setCurrentHouse()
+  await fetchCurrentHouse()
   loading.value = false
 })
-
-import { useHousesStore } from '@/stores/housesStore'
-import { useCurrentHouseStore } from '@/stores/currentHouseStore'
-import { storeToRefs } from 'pinia'
 
 import { useRoute } from 'vue-router'
 const route = useRoute()
 
-const { houses } = storeToRefs(useHousesStore())
-const setCurrentHouse = async () => {
-  const houseSlug = route.params.slug
-  const targetHouse = houses.value.find((house) => house.attributes.slug == houseSlug)
-  useCurrentHouseStore().updateCurrentHouse(targetHouse)
+import useInitializeCurrentHouse from '@/composables/initializers/useInitializeCurrentHouse'
+const fetchCurrentHouse = async () => {
+  const houseSlug = route.params.slug as string
+  useInitializeCurrentHouse(houseSlug)
 }
 </script>
 
