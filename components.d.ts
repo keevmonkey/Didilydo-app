@@ -11,6 +11,7 @@ declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     AppDialog: typeof import('./src/components/app/AppDialog.vue')['default']
     AppImage: typeof import('./src/components/app/AppImage.vue')['default']
+    AppSectionHeader: typeof import('./src/components/app/AppSectionHeader.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }
