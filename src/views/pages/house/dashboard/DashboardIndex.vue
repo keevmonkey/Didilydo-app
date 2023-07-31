@@ -10,9 +10,15 @@
       <v-list-item-subtitle>{{ currentHouse?.attributes?.description }}</v-list-item-subtitle>
     </v-list-item>
 
-    <div>
-      <DashboardUsersList />
-    </div>
+    <v-divider class="my-3" />
+
+    <DashboardOverview />
+
+    <v-divider class="my-3" />
+
+    <DashboardUsersList />
+
+    <v-divider class="my-3" />
 
     <v-card variant="tonal" color="info">
       <v-card-title>{{ currentHouseName }}</v-card-title>
@@ -27,6 +33,7 @@
 
 <script setup lang="ts">
 import DashboardUsersList from './components/DashboardUsersList.vue'
+import DashboardOverview from './components/DashboardOverview.vue'
 
 import { useRoute } from 'vue-router'
 import { computed } from 'vue'
