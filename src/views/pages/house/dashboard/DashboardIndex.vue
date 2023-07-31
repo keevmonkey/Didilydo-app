@@ -10,6 +10,10 @@
       <v-list-item-subtitle>{{ currentHouse?.attributes?.description }}</v-list-item-subtitle>
     </v-list-item>
 
+    <div>
+      <DashboardUsersList />
+    </div>
+
     <v-card variant="tonal" color="info">
       <v-card-title>{{ currentHouseName }}</v-card-title>
       <v-card-text>
@@ -22,6 +26,8 @@
 </template>
 
 <script setup lang="ts">
+import DashboardUsersList from './components/DashboardUsersList.vue'
+
 import { useRoute } from 'vue-router'
 import { computed } from 'vue'
 const route = useRoute()
