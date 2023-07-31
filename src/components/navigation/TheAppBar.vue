@@ -7,7 +7,8 @@
 
     <template v-slot:append>
       <div class="d-flex align-center">
-        <v-btn icon v-if="isHouseLayout">
+        <!-- House Nav Links -->
+        <v-btn  icon v-if="isHouseLayout">
           <v-icon>mdi-home-circle</v-icon>
           <v-menu activator="parent" :close-on-content-click="false">
             <v-list nav>
@@ -28,6 +29,7 @@
             </v-list>
           </v-menu>
         </v-btn>
+        <!-- Account Nav Links -->
         <v-btn icon>
           <v-icon>mdi-account-circle-outline</v-icon>
           <v-menu activator="parent" :close-on-content-click="false">
