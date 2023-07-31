@@ -8,7 +8,7 @@
     <template v-slot:append>
       <div class="d-flex align-center">
         <!-- House Nav Links -->
-        <v-btn  icon v-if="isHouseLayout">
+        <v-btn icon v-if="isHouseLayout">
           <v-icon>mdi-home-circle</v-icon>
           <v-menu activator="parent" :close-on-content-click="false">
             <v-list nav>
@@ -31,7 +31,9 @@
         </v-btn>
         <!-- Account Nav Links -->
         <v-btn icon>
-          <v-icon>mdi-account-circle-outline</v-icon>
+          <v-avatar>
+            <app-image :src="currentUserAvatar" :placeholder="currentUserName" :cover="false" />
+          </v-avatar>
           <v-menu activator="parent" :close-on-content-click="false">
             <v-list nav>
               <v-list-item
@@ -66,4 +68,9 @@ const route = useRoute()
 
 const isHouseLayout = computed(() => route.path.split('/')[1] === 'house')
 const houseSlug = computed(() => route.params.slug)
+
+import { useCurrentUserStore } from '@/stores/currentUserStore'
+import { storeToRefs } from 'pinia'
+
+const { currentUserName, currentUserAvatar } = storeToRefs(useCurrentUserStore())
 </script>
