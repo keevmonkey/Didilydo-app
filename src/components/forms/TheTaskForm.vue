@@ -7,8 +7,78 @@
       <v-form @submit.prevent>
         <v-text-field v-model="data.name" :rules="rules.name" label="Name" variant="filled" />
         <v-textarea v-model="data.description" label="Description" variant="filled" />
-        <v-text-field v-model="data.requester_id" label="Requester" variant="filled" />
-        <v-text-field v-model="data.owner_id" label="Owner" variant="filled" />
+        <!-- <v-text-field v-model="data.requester_id" label="Requester" variant="filled" />
+        <v-text-field v-model="data.owner_id" label="Owner" variant="filled" /> -->
+
+        <!-- :items="['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']" -->
+        <!-- <v-autocomplete chips label="Autocomplete" :items="users" variant="solo-filled" /> -->
+
+        <v-row>
+          <v-col cols="6">
+            <v-autocomplete
+              v-model="data.requester_id"
+              :items="users"
+              chips
+              color="blue-grey-lighten-2"
+              item-title="attributes.name"
+              item-value="id"
+              label="Requester"
+            >
+              <template v-slot:chip="{ props, item }">
+                <v-chip
+                  v-bind="props"
+                  :prepend-avatar="item.raw.links.avatar"
+                  :text="item.raw.attributes.name"
+                ></v-chip>
+              </template>
+
+              <template v-slot:item="{ props, item }">
+                <v-list-item
+                  v-bind="props"
+                  :prepend-avatar="item?.raw.links?.avatar"
+                  :title="item?.raw.attributes?.name"
+                  :subtitle="item?.raw?.attributes.email"
+                ></v-list-item>
+              </template>
+            </v-autocomplete>
+          </v-col>
+
+          <v-col cols="6">
+            <v-autocomplete
+              v-model="data.owner_id"
+              :items="users"
+              chips
+              color="blue-grey-lighten-2"
+              item-title="attributes.name"
+              item-value="id"
+              label="Task Owner"
+            >
+              <template v-slot:chip="{ props, item }">
+                <v-chip
+                  v-bind="props"
+                  :prepend-avatar="item.raw.links.avatar"
+                  :text="item.raw.attributes.name"
+                ></v-chip>
+              </template>
+
+              <template v-slot:item="{ props, item }">
+                <v-list-item
+                  v-bind="props"
+                  :prepend-avatar="item?.raw.links?.avatar"
+                  :title="item?.raw.attributes?.name"
+                  :subtitle="item?.raw?.attributes.email"
+                ></v-list-item>
+              </template>
+            </v-autocomplete>
+          </v-col>
+        </v-row>
+
+        <v-select
+          label="Priority"
+          variant="filled"
+          :items="['low', 'normal', 'high']"
+          v-model="data.priority"
+        />
       </v-form>
 
       {{ task }}
@@ -40,24 +110,42 @@ const loadingData = ref<boolean>(true)
 
 const setExistingTask = async () => {
   if (!props.task) return
-  const { name, description } = props.task.attributes
+  const { name, description, priority } = props.task.attributes
   const { requester, owner } = props.task.relationships
   data.value = {
     name,
     description,
+    priority,
     requester_id: requester.data.id,
     owner_id: owner.data.id
   }
 }
 
+const prioritySample = ref([
+  {
+    value: 0,
+    name: 'Low'
+  },
+  {
+    value: 1,
+    name: 'normal'
+  },
+  {
+    value: 2,
+    name: 'High'
+  }
+])
+
 const data = ref<{
   name: string
   description: string
+  priority: string
   requester_id: string | number
   owner_id: string | number
 }>({
   name: '',
   description: '',
+  priority: 'normal',
   requester_id: '',
   owner_id: ''
 })
@@ -89,6 +177,8 @@ import { useCurrentHouseStore } from '@/stores/currentHouse/currentHouseStore'
 const { currentHouseSlug } = storeToRefs(useCurrentHouseStore())
 import { useCurrentHouseTasksStore } from '@/stores/currentHouse/tasksStore'
 const currentHouseTasksStore = useCurrentHouseTasksStore()
+import { useCurrentHouseUsersStore } from '@/stores/currentHouse/usersStore'
+const { users } = storeToRefs(useCurrentHouseUsersStore())
 
 import useAxios from '@/composables/backend/useAxios'
 const { $securedAxios } = useAxios()
