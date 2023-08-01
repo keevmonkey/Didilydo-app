@@ -1,20 +1,29 @@
 <template>
   <div>
-    <v-card variant="tonal" color="violet" class="py-4">
-      <v-list-item title="Your Houses" prepend-icon="mdi-home-group">
-        <template #append>
-          <v-btn
-            variant="text"
-            @click="toggleActivateTheHouseForm()"
-            append-icon="mdi-plus"
-            text="new"
-          />
-        </template>
-      </v-list-item>
+    <v-list-item>
+      <v-list-item-title class="font-weight-bold text-overline">Your Houses</v-list-item-title>
+      <template #append>
+        <v-btn
+          variant="text"
+          @click="toggleActivateTheHouseForm()"
+          append-icon="mdi-plus"
+          text="new"
+        />
+      </template>
+    </v-list-item>
+    <v-card variant="tonal" color="secondary" class="py-4">
       <v-list-item v-for="house in houses" :key="house.id">
+        <template #prepend>
+          <v-avatar>
+            <app-image :src="house.links.avatar" :placeholder="house.attributes.name" />
+          </v-avatar>
+        </template>
         <v-list-item-title>{{ house.attributes.name }}</v-list-item-title>
+        <v-list-item-subtitle>{{ house.attributes.description }}</v-list-item-subtitle>
         <template #append>
-          <v-btn variant="text" @click="visitHouse(house)"> Inspect </v-btn>
+          <v-btn variant="text" icon @click="visitHouse(house)">
+            <v-icon>mdi-chevron-right-circle</v-icon>
+          </v-btn>
         </template>
       </v-list-item>
     </v-card>
