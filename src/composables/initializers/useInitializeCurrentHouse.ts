@@ -28,8 +28,8 @@ export default async function useInitializeCurrentHouse(slug: string) {
 
       // Set task
       const tasks = filterIncluded(includedPayload, 'task')
-      updateTasks(tasks)
-      
+      updateTasks({ method: 'index', payload: tasks })
+
       // Set users
       const users = filterIncluded(includedPayload, 'user')
       updateUsers(users)

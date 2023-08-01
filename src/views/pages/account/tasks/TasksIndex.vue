@@ -57,13 +57,13 @@ import { ref } from 'vue'
 const data = ref<{
   name: string
   description: string
-  requester_user_id: string
-  owner_user_id: string
+  requester_id: string
+  owner_id: string
 }>({
   name: '',
   description: '',
-  requester_user_id: '',
-  owner_user_id: ''
+  requester_id: '',
+  owner_id: ''
 })
 
 const rules = {
@@ -97,7 +97,7 @@ const createATask = () => {
 import { useCurrentUserStore } from '@/stores/currentUserStore'
 const setDefaultOwnerAndRequester = () => {
   const currentUserId = useCurrentUserStore().currentUser.id
-  data.value.requester_user_id = currentUserId
-  data.value.owner_user_id = currentUserId
+  data.value.requester_id = currentUserId
+  data.value.owner_id = currentUserId
 }
 </script>

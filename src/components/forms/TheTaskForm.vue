@@ -27,13 +27,13 @@ import { ref } from 'vue'
 const data = ref<{
   name: string
   description: string
-  requester_user_id: string
-  owner_user_id: string
+  requester_id: string
+  owner_id: string
 }>({
   name: '',
   description: '',
-  requester_user_id: '',
-  owner_user_id: ''
+  requester_id: '',
+  owner_id: ''
 })
 
 const rules = {
@@ -45,16 +45,16 @@ const emits = defineEmits(['deactivate'])
 import { useCurrentUserStore } from '@/stores/currentUserStore'
 const setDefaultOwnerAndRequester = () => {
   const currentUserId = useCurrentUserStore().currentUser.id
-  data.value.requester_user_id = currentUserId
-  data.value.owner_user_id = currentUserId
+  data.value.requester_id = currentUserId
+  data.value.owner_id = currentUserId
 }
 
 const resetData = () => {
   data.value = {
     name: '',
     description: '',
-    requester_user_id: '',
-    owner_user_id: ''
+    requester_id: '',
+    owner_id: ''
   }
 }
 
@@ -73,7 +73,7 @@ const createATask = () => {
   $securedAxios
     .post(endpoint, params)
     .then((response) => {
-      currentHouseTasksStore.addNewTask(response.data.data)
+      currentHouseTasksStore.updateTasks({ method: 'add', payload: response.data.data })
       resetData()
       emits('deactivate')
     })

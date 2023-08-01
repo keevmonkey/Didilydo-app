@@ -11,7 +11,9 @@ export type TaskAttributes = {
   description: string
   priority: string
   categories: any | any[]
-  status: string
+  status: TaskPossibleStatus
+  requesterId: string
+  ownerId: string
 }
 
 export type TaskLinks = {
@@ -21,3 +23,5 @@ export type TaskLinks = {
 export type TaskRelationships = {
   house: { data: {} }
 }
+
+export type TaskPossibleStatus = 'unstarted' | 'started' | 'completed' | 'overdue'
