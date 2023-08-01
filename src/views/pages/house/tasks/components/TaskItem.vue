@@ -4,24 +4,33 @@
       <v-list-item-title>{{ task.attributes.name }}</v-list-item-title>
       <v-list-item-subtitle>{{ task.attributes.description }}</v-list-item-subtitle>
       <template #append>
-        <v-chip variant="flat" :color="taskStatusColor(task.attributes.status)" class="text-capitalize">
-          {{ task.attributes.status }}
+        <div class="d-flex align-center">
+          <v-chip
+            variant="flat"
+            :color="taskStatusColor(task.attributes.status)"
+            class="text-capitalize"
+          >
+            {{ task.attributes.status }}
 
-          <v-menu activator="parent">
-            <v-list>
-              <v-list-item subtitle="Update Status:" />
-              <v-divider />
-              <v-list-item
-                v-for="status in possibleStatuses"
-                :key="status"
-                class="text-capitalize"
-                :class="`text-${taskStatusColor(status as TaskPossibleStatus)}`"
-                :title="status"
-                @click="updateTaskStatus(status as TaskPossibleStatus)"
-              />
-            </v-list>
-          </v-menu>
-        </v-chip>
+            <v-menu activator="parent">
+              <v-list>
+                <v-list-item subtitle="Update Status:" />
+                <v-divider />
+                <v-list-item
+                  v-for="status in possibleStatuses"
+                  :key="status"
+                  class="text-capitalize"
+                  :class="`text-${taskStatusColor(status as TaskPossibleStatus)}`"
+                  :title="status"
+                  @click="updateTaskStatus(status as TaskPossibleStatus)"
+                />
+              </v-list>
+            </v-menu>
+          </v-chip>
+          <v-btn icon variant="text" color="secondary" @click="emits('toggleEditTask')">
+            <v-icon>mdi-eye-circle</v-icon>
+          </v-btn>
+        </div>
       </template>
     </v-list-item>
   </div>
@@ -61,4 +70,6 @@ const updateTaskStatus = (status: TaskPossibleStatus) => {
       console.log(error)
     })
 }
+
+const emits = defineEmits(['toggleEditTask'])
 </script>
