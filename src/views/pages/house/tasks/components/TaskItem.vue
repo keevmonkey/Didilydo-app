@@ -6,6 +6,15 @@
       <template #append>
         <div class="d-flex align-center">
           <v-chip
+            label
+            variant="flat"
+            class="text-capitalize mr-2"
+            :color="taskPriorityColor(task.attributes.priority)"
+          >
+            {{ task.attributes.priority }}
+          </v-chip>
+
+          <v-chip
             variant="flat"
             :color="taskStatusColor(task.attributes.status)"
             class="text-capitalize"
@@ -42,7 +51,7 @@ import { SerializedTask } from '@/models/SerializedTask.model'
 const props = defineProps<{ task: SerializedTask }>()
 
 import useTaskMixin from '@/composables/mixins/useTaskMixin'
-const { statusColor: taskStatusColor } = useTaskMixin()
+const { statusColor: taskStatusColor, priorityColor: taskPriorityColor } = useTaskMixin()
 
 import { computed } from 'vue'
 const possibleStatuses = computed(() => {

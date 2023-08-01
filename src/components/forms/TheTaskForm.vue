@@ -121,21 +121,6 @@ const setExistingTask = async () => {
   }
 }
 
-const prioritySample = ref([
-  {
-    value: 0,
-    name: 'Low'
-  },
-  {
-    value: 1,
-    name: 'normal'
-  },
-  {
-    value: 2,
-    name: 'High'
-  }
-])
-
 const data = ref<{
   name: string
   description: string
@@ -167,6 +152,7 @@ const resetData = () => {
   data.value = {
     name: '',
     description: '',
+    priority: '',
     requester_id: '',
     owner_id: ''
   }
