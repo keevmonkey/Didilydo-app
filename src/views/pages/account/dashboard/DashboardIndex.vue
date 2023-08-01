@@ -1,20 +1,16 @@
 <template>
   <div>
-    <v-list-item :title="title" subtitle="Your personal home management app!" class="mb-4">
-      <template #append?>
+    <v-list-item class="py-3 mb-3">
+      <template #prepend>
         <v-avatar>
-          <v-icon>mdi-account</v-icon>
+          <app-image :src="currentUserAvatar" :placeholder="currentUserName" />
         </v-avatar>
       </template>
+      <v-list-item-title class="font-weight-bold text-h5 text-capitalize">{{ currentUserName }}</v-list-item-title>
+      <v-list-item-subtitle>Welcome to your account on Didilydo!</v-list-item-subtitle>
     </v-list-item>
 
-    <v-list-item
-      class="text-wrap"
-      title="Somebody paid for a fan RM 24.00"
-      prepend-icon="mdi-account"
-      subtitle="added to the accounts"
-    >
-    </v-list-item>
+    <v-divider class="my-3"/>
 
     <DashboardHousesList />
 
@@ -118,7 +114,7 @@ import { useCurrentUserStore } from '@/stores/currentUserStore'
 import { storeToRefs } from 'pinia'
 import { computed } from 'vue'
 
-const { currentUser, currentUserName } = storeToRefs(useCurrentUserStore())
+const { currentUser, currentUserName, currentUserAvatar } = storeToRefs(useCurrentUserStore())
 
 const title = computed(() => `Hey ${currentUserName.value}! Welcome to Didilydo!`)
 </script>
