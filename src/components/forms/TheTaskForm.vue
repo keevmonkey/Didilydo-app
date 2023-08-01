@@ -7,11 +7,6 @@
       <v-form @submit.prevent>
         <v-text-field v-model="data.name" :rules="rules.name" label="Name" variant="filled" />
         <v-textarea v-model="data.description" label="Description" variant="filled" />
-        <!-- <v-text-field v-model="data.requester_id" label="Requester" variant="filled" />
-        <v-text-field v-model="data.owner_id" label="Owner" variant="filled" /> -->
-
-        <!-- :items="['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']" -->
-        <!-- <v-autocomplete chips label="Autocomplete" :items="users" variant="solo-filled" /> -->
 
         <v-row>
           <v-col cols="6">
@@ -74,14 +69,16 @@
         </v-row>
 
         <v-select
+          v-model="data.priority"
           label="Priority"
           variant="filled"
           :items="['low', 'normal', 'high']"
-          v-model="data.priority"
         />
-      </v-form>
 
-      {{ task }}
+        <div class="d-flex align-center justify-center">
+          <VueDatePicker v-model="data.due_date" inline auto-apply />
+        </div>
+      </v-form>
 
       <v-card-actions>
         <v-spacer />
@@ -95,6 +92,8 @@
 </template>
 
 <script setup lang="ts">
+import VueDatePicker from '@vuepic/vue-datepicker'
+import '@vuepic/vue-datepicker/dist/main.css'
 import { ref, onMounted } from 'vue'
 
 import { SerializedTask } from '@/models/SerializedTask.model'
@@ -110,12 +109,13 @@ const loadingData = ref<boolean>(true)
 
 const setExistingTask = async () => {
   if (!props.task) return
-  const { name, description, priority } = props.task.attributes
+  const { name, description, priority, dueDate } = props.task.attributes
   const { requester, owner } = props.task.relationships
   data.value = {
     name,
     description,
     priority,
+    due_date: dueDate,
     requester_id: requester.data.id,
     owner_id: owner.data.id
   }
@@ -125,12 +125,14 @@ const data = ref<{
   name: string
   description: string
   priority: string
+  due_date: Date | string
   requester_id: string | number
   owner_id: string | number
 }>({
   name: '',
   description: '',
   priority: 'normal',
+  due_date: '',
   requester_id: '',
   owner_id: ''
 })
@@ -153,6 +155,7 @@ const resetData = () => {
     name: '',
     description: '',
     priority: '',
+    due_date: '',
     requester_id: '',
     owner_id: ''
   }

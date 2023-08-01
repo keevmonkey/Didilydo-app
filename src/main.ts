@@ -1,5 +1,8 @@
 import './assets/main.scss'
 
+import VueDatePicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css'
+
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import axios from 'axios'
@@ -15,6 +18,7 @@ app.use(VueAxios, axios)
 app.use(pinia)
 app.use(router)
 app.use(vuetify)
+app.component('VueDatePicker', VueDatePicker);
 
 await router.isReady()
 app.mount('#app')
