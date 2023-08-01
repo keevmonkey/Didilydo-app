@@ -21,6 +21,5 @@ export type HouseLinks = {
 export type HouseRelationships = {
   tenancies: { data: [] }
   users: { data: [] }
-  taskLists: { data: [] }
   tasks: { data: [] }
 }

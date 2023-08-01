@@ -31,7 +31,7 @@ onMounted(async () => {
   console.log('sessionExpired', route.query.sessionExpired)
   if (route.query.sessionExpired == 'true') {
     await clearSession()
-    router.push('/auth/signin')
+    redirectToSignIn()
   } else {
     if (sessionStore.sessionCsrf) return
     const localCsrf = localStorage.getItem('csrf')
@@ -39,13 +39,14 @@ onMounted(async () => {
       await reinitializeLoggedInUser(localCsrf)
       handleDefaultAppRedirection()
     } else {
-      router.push('/auth/signin')
+      redirectToSignIn()
     }
   }
 })
 
 const localSession = useLocalSession()
 const clearSession = async () => localSession.populateLocalSession(null)
+const redirectToSignIn = async () => router.push('/auth/signin')
 
 const reinitializeLoggedInUser = async (csrf: string): Promise<void> => {
   await sessionStore.setSessionCsrf(csrf)

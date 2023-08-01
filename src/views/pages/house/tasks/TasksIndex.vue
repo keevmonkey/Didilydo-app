@@ -1,91 +1,61 @@
 <template>
   <div>
-    <v-list-item title="Task Index"></v-list-item>
+    <app-section-header title="Tasks List" subtitle="You've got some work to do!" text-color="pink">
+      <template #actions>
+        <v-btn variant="text" @click="toggleActivateTheHouseTaskForm()">
+          Add
+          <v-icon end>mdi-plus</v-icon>
+        </v-btn>
+      </template>
+    </app-section-header>
 
     <v-list>
-      <div v-for="n in 4" :key="n">
-        <v-list-item class="py-3">
-          <v-list-item-title>A special task</v-list-item-title>
-          <v-list-item-subtitle>Click me for pop up</v-list-item-subtitle>
-          <template #append>
-            <v-btn icon variant="text">
-              <v-icon color="indigo">mdi-eye</v-icon>
-            </v-btn>
-          </template>
-        </v-list-item>
-        <v-divider />
-      </div>
-
       <div v-for="task in tasks" :key="task.id">
-        <v-list-item class="py-3">
-          <v-list-item-title>{{ task.attributes.name }}</v-list-item-title>
-          <v-list-item-subtitle>{{ task.attributes.description }}</v-list-item-subtitle>
-          <template #append>
-            <v-btn icon variant="text">
-              <v-icon color="indigo">mdi-eye</v-icon>
-            </v-btn>
-          </template>
-        </v-list-item>
+        <TaskItem :task="task" @toggleEditTask="setAndEditTask(task)" />
         <v-divider />
       </div>
 
-      <v-form @submit.prevent>
-        <v-text-field
-          v-model="data.name"
-          :rules="rules.name"
-          label="Name"
-          class="mb-2"
-          variant="outlined"
-        />
-        <v-text-field
-          v-model="data.description"
-          label="Description"
-          class="mb-2"
-          variant="outlined"
-        />
-      </v-form>
-
-      <v-list-item title="A new task" append-icon="mdi-plus" @click="createATask()" variant="tonal">
-      </v-list-item>
+      <v-list-item
+        title="A new task"
+        append-icon="mdi-plus"
+        @click="toggleActivateTheHouseTaskForm()"
+        variant="tonal"
+      />
     </v-list>
+
+    <app-dialog
+      title="Let's create a house"
+      subtitle="To begin your journey on Didilydo"
+      :activate="activateTheHouseTaskForm"
+      @deactivate=";[toggleActivateTheHouseTaskForm(), (targetTask = null)]"
+      max-width="500"
+    >
+      <TheTaskForm
+        @deactivate=";[toggleActivateTheHouseTaskForm(), (targetTask = null)]"
+        :task="targetTask"
+      />
+    </app-dialog>
   </div>
 </template>
 
 <script setup lang="ts">
+import TheTaskForm from '@/components/forms/TheTaskForm.vue'
+import TaskItem from './components/TaskItem.vue'
 import { ref } from 'vue'
-
-const data = ref<{
-  name: string
-  description: string
-}>({
-  name: '',
-  description: ''
-})
-
-const rules = {
-  name: [(v: string) => !!v || 'Name is required']
+const activateTheHouseTaskForm = ref<boolean>(false)
+const toggleActivateTheHouseTaskForm = () => {
+  activateTheHouseTaskForm.value = !activateTheHouseTaskForm.value
 }
 
 import { storeToRefs } from 'pinia'
 import { useCurrentHouseTasksStore } from '@/stores/currentHouse/tasksStore'
+import { SerializedTask } from '@/models/SerializedTask.model'
 const currentHouseTasksStore = useCurrentHouseTasksStore()
 const { tasks } = storeToRefs(currentHouseTasksStore)
-import { useCurrentHouseStore } from '@/stores/currentHouse/currentHouseStore'
-const { currentHouseSlug } = storeToRefs(useCurrentHouseStore())
 
-import useAxios from '@/composables/backend/useAxios'
-const { $securedAxios } = useAxios()
-const createATask = () => {
-  const params = data.value
-  const endpoint = `/api/v1/house/${currentHouseSlug}/tasks`
-  $securedAxios
-    .post(endpoint, params)
-    .then((response) => {
-      currentHouseTasksStore.addNewTask(response.data.data)
-      // emit('submissionCompleted')
-    })
-    .catch((error) => {
-      console.log('error', error)
-    })
+const targetTask = ref<SerializedTask>()
+const setAndEditTask = async (task: SerializedTask) => {
+  targetTask.value = task
+  toggleActivateTheHouseTaskForm()
 }
 </script>

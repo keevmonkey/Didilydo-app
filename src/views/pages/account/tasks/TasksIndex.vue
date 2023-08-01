@@ -57,9 +57,13 @@ import { ref } from 'vue'
 const data = ref<{
   name: string
   description: string
+  requester_id: string
+  owner_id: string
 }>({
   name: '',
-  description: ''
+  description: '',
+  requester_id: '',
+  owner_id: ''
 })
 
 const rules = {
@@ -76,8 +80,9 @@ const { currentHouseSlug } = storeToRefs(useCurrentHouseStore())
 import useAxios from '@/composables/backend/useAxios'
 const { $securedAxios } = useAxios()
 const createATask = () => {
+  setDefaultOwnerAndRequester()
   const params = data.value
-  const endpoint = `/api/v1/house/${currentHouseSlug}/tasks`
+  const endpoint = `/api/v1/houses/${currentHouseSlug.value}/tasks`
   $securedAxios
     .post(endpoint, params)
     .then((response) => {
@@ -87,5 +92,12 @@ const createATask = () => {
     .catch((error) => {
       console.log('error', error)
     })
+}
+
+import { useCurrentUserStore } from '@/stores/currentUserStore'
+const setDefaultOwnerAndRequester = () => {
+  const currentUserId = useCurrentUserStore().currentUser.id
+  data.value.requester_id = currentUserId
+  data.value.owner_id = currentUserId
 }
 </script>
