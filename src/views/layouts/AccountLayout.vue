@@ -18,7 +18,7 @@ import { RouterView } from 'vue-router'
 
 <style scoped lang="scss">
 .main-layout-pages {
-  // min-height: 100vh;
+  min-height: 100vh;
   // display: flex;
   // align-items: center;
   // justify-content: center;
