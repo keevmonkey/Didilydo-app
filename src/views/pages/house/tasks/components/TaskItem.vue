@@ -49,7 +49,7 @@
 <script setup lang="ts">
 import { TaskPossibleStatus } from '@/models/SerializedTask.model'
 import { SerializedTask } from '@/models/SerializedTask.model'
-const props = withDefaults(defineProps<{ task: SerializedTask; includeDivider: boolean }>(), {
+const props = withDefaults(defineProps<{ task: SerializedTask; includeDivider?: boolean }>(), {
   includeDivider: true
 })
 

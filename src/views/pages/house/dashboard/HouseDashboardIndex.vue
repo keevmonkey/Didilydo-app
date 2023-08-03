@@ -10,9 +10,10 @@
       <v-list-item-subtitle>{{ currentHouse?.attributes?.description }}</v-list-item-subtitle>
     </v-list-item>
 
-    <v-divider class="my-3" />
 
     <DashboardOverview />
+
+    <v-divider class="my-3" />
 
     <HouseUsersList />
 

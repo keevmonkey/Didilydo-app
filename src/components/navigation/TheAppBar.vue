@@ -92,6 +92,11 @@ const houseRoutes = ref([
     name: 'house-tasks',
     title: 'Tasks',
     icon: 'mdi-clipboard-outline'
+  },
+  {
+    name: 'house-finances',
+    title: 'Finances',
+    icon: 'mdi-cash'
   }
 ])
 </script>
