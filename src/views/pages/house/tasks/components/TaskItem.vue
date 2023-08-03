@@ -6,6 +6,15 @@
       <template #append>
         <div class="d-flex align-center">
           <v-chip
+            label
+            variant="flat"
+            class="text-capitalize mr-2"
+            :color="taskPriorityColor(task.attributes.priority)"
+          >
+            {{ task.attributes.priority }}
+          </v-chip>
+
+          <v-chip
             variant="flat"
             :color="taskStatusColor(task.attributes.status)"
             class="text-capitalize"
@@ -33,16 +42,19 @@
         </div>
       </template>
     </v-list-item>
+    <v-divider v-if="includeDivider" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { TaskPossibleStatus } from '@/models/SerializedTask.model'
 import { SerializedTask } from '@/models/SerializedTask.model'
-const props = defineProps<{ task: SerializedTask }>()
+const props = withDefaults(defineProps<{ task: SerializedTask; includeDivider: boolean }>(), {
+  includeDivider: true
+})
 
 import useTaskMixin from '@/composables/mixins/useTaskMixin'
-const { statusColor: taskStatusColor } = useTaskMixin()
+const { statusColor: taskStatusColor, priorityColor: taskPriorityColor } = useTaskMixin()
 
 import { computed } from 'vue'
 const possibleStatuses = computed(() => {
