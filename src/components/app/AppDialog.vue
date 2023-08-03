@@ -52,7 +52,7 @@ import { computed } from 'vue'
 import useThemeSettings from '@/composables/useThemeSettings'
 const { isDarkMode } = useThemeSettings()
 const avatarColor = computed(() => (isDarkMode.value ? 'bg-primary' : ''))
-const defaultHeaderColor = computed(() => (isDarkMode.value ? 'bg-dark' : 'bg-white'))
+const defaultHeaderColor = computed(() => (isDarkMode.value ? 'bg-dark' : 'bg-secondary'))
 
 type TNCModalProps = {
   activate: boolean

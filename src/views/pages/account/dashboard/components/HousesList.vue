@@ -1,6 +1,6 @@
 <template>
   <div>
-    <app-section-header title="Houses" subtitle="Take a look into a house" text-color="indigo">
+    <app-section-header title="Houses" subtitle="Take a look into a house" text-color="info">
       <template #actions>
         <v-btn
           variant="text"

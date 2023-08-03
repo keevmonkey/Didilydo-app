@@ -1,27 +1,24 @@
 <template>
-  <v-app-bar :elevation="0" rounded color="primary">
-    <v-app-bar-title class="text-secondary">Didilydo</v-app-bar-title>
+  <v-app-bar :elevation="0" hide color="primary">
+    <v-app-bar-title class="text-secondary text-h5">Didilydo</v-app-bar-title>
 
     <template v-slot:append>
       <!-- House Nav Links -->
       <v-btn icon v-if="isHouseLayout">
         <v-icon>mdi-home-circle</v-icon>
-        <v-menu activator="parent" :close-on-content-click="false">
+        <v-menu activator="parent" :close-on-content-click="true">
           <v-list nav>
+            <v-list-item density="compact" class="bg-secondary">
+              <v-list-item-title class="font-weight-bold ">House Nav Menu</v-list-item-title>
+            </v-list-item>
             <v-list-item
-              :to="{ name: 'house-dashboard' }"
+              v-for="houseRoute in houseRoutes"
+              :key="houseRoute.name"
+              :title="houseRoute.title"
+              :append-icon="houseRoute.icon"
+              :to="{ name: houseRoute.name }"
               :params="{ slug: houseSlug }"
-              title="Dashboard"
-              append-icon="mdi-menu"
             />
-            <v-list-item
-              :to="{ name: 'house-tasks' }"
-              :params="{ slug: houseSlug }"
-              title="Tasks"
-              append-icon="mdi-clipboard-outline"
-            />
-            <v-list-item to="/" title="house" append-icon="mdi-account" />
-            <v-list-item title="Settings" append-icon="mdi-cog" />
           </v-list>
         </v-menu>
       </v-btn>
@@ -30,16 +27,18 @@
         <v-avatar>
           <app-image :src="currentUserAvatar" :placeholder="currentUserName" :cover="false" />
         </v-avatar>
-        <v-menu activator="parent" :close-on-content-click="false">
+        <v-menu activator="parent" :close-on-content-click="true">
           <v-list nav>
+            <v-list-item density="compact" class="bg-secondary">
+              <v-list-item-title class="font-weight-bold ">Account Nav Menu</v-list-item-title>
+            </v-list-item>
             <v-list-item
-              :to="{ name: 'account-dashboard' }"
-              title="Dashboard"
-              append-icon="mdi-menu"
+              v-for="accountRoute in accountRoutes"
+              :key="accountRoute.name"
+              :title="accountRoute.title"
+              :append-icon="accountRoute.icon"
+              :to="{ name: accountRoute.name }"
             />
-            <v-list-item to="/account/tasks" title="Tasks" append-icon="mdi-clipboard-outline" />
-            <v-list-item to="/" title="Account" append-icon="mdi-account" />
-            <v-list-item title="Settings" append-icon="mdi-cog" />
             <TheSignOutButton />
           </v-list>
         </v-menu>
@@ -52,12 +51,6 @@
 import TheSignOutButton from './TheSignOutButton.vue'
 import { ref, computed } from 'vue'
 
-const collapsedAppBar = ref<boolean>(false)
-const toggleCollapse = () => (collapsedAppBar.value = !collapsedAppBar.value)
-const collapsedMenuButton = computed(() =>
-  collapsedAppBar.value ? 'mdi-chevron-right' : 'mdi-chevron-left'
-)
-
 import { useRoute } from 'vue-router'
 const route = useRoute()
 
@@ -68,4 +61,42 @@ import { useCurrentUserStore } from '@/stores/currentUserStore'
 import { storeToRefs } from 'pinia'
 
 const { currentUserName, currentUserAvatar } = storeToRefs(useCurrentUserStore())
+
+// account routes
+const accountRoutes = ref([
+  {
+    name: 'account-dashboard',
+    title: 'Dashboard',
+    icon: 'mdi-menu'
+  },
+  {
+    name: 'account-tasks',
+    title: 'Tasks',
+    icon: 'mdi-clipboard-outline'
+  },
+  {
+    name: 'account-settings',
+    title: 'Settings',
+    icon: 'mdi-cog'
+  }
+])
+
+// house routes
+const houseRoutes = ref([
+  {
+    name: 'house-dashboard',
+    title: 'Dashboard',
+    icon: 'mdi-menu'
+  },
+  {
+    name: 'house-tasks',
+    title: 'Tasks',
+    icon: 'mdi-clipboard-outline'
+  },
+  {
+    name: 'house-finances',
+    title: 'Finances',
+    icon: 'mdi-cash'
+  }
+])
 </script>
