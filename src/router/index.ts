@@ -23,6 +23,27 @@ const router = createRouter({
       ]
     },
     {
+      path: '/account',
+      component: AccountLayout,
+      children: [
+        {
+          path: 'dashboard',
+          name: 'account-dashboard',
+          component: () => import('@/views/pages/account/dashboard/AccountDashboardIndex.vue')
+        },
+        {
+          path: 'tasks',
+          name: 'account-tasks',
+          component: () => import('@/views/pages/account/tasks/AccountTasksIndex.vue')
+        },
+        {
+          path: 'settings',
+          name: 'account-settings',
+          component: () => import('@/views/pages/account/settings/AccountSettingsIndex.vue')
+        }
+      ]
+    },
+    {
       path: '/house/:slug',
       component: HouseLayout,
       children: [
@@ -40,22 +61,6 @@ const router = createRouter({
           path: 'tasks',
           name: 'house-tasks',
           component: () => import('@/views/pages/house/tasks/HouseTasksIndex.vue')
-        }
-      ]
-    },
-    {
-      path: '/account',
-      component: AccountLayout,
-      children: [
-        {
-          path: 'dashboard',
-          name: 'account-dashboard',
-          component: () => import('@/views/pages/account/dashboard/AccountDashboardIndex.vue')
-        },
-        {
-          path: 'tasks',
-          name: 'account-tasks',
-          component: () => import('@/views/pages/account/tasks/AccountTasksIndex.vue')
         }
       ]
     },
