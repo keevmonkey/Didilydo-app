@@ -1,12 +1,12 @@
 <template>
-  <v-app-bar :elevation="0" rounded color="primary">
-    <v-app-bar-title class="text-secondary">Didilydo</v-app-bar-title>
+  <v-app-bar :elevation="0" hide color="primary">
+    <v-app-bar-title class="text-secondary text-h5">Didilydo</v-app-bar-title>
 
     <template v-slot:append>
       <!-- House Nav Links -->
       <v-btn icon v-if="isHouseLayout">
         <v-icon>mdi-home-circle</v-icon>
-        <v-menu activator="parent" :close-on-content-click="false">
+        <v-menu activator="parent" :close-on-content-click="true">
           <v-list nav>
             <v-list-item
               :to="{ name: 'house-dashboard' }"
@@ -30,7 +30,7 @@
         <v-avatar>
           <app-image :src="currentUserAvatar" :placeholder="currentUserName" :cover="false" />
         </v-avatar>
-        <v-menu activator="parent" :close-on-content-click="false">
+        <v-menu activator="parent" :close-on-content-click="true">
           <v-list nav>
             <v-list-item
               :to="{ name: 'account-dashboard' }"
