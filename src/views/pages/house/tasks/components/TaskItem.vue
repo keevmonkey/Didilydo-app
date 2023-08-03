@@ -42,13 +42,16 @@
         </div>
       </template>
     </v-list-item>
+    <v-divider v-if="includeDivider" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { TaskPossibleStatus } from '@/models/SerializedTask.model'
 import { SerializedTask } from '@/models/SerializedTask.model'
-const props = defineProps<{ task: SerializedTask }>()
+const props = withDefaults(defineProps<{ task: SerializedTask; includeDivider: boolean }>(), {
+  includeDivider: true
+})
 
 import useTaskMixin from '@/composables/mixins/useTaskMixin'
 const { statusColor: taskStatusColor, priorityColor: taskPriorityColor } = useTaskMixin()
