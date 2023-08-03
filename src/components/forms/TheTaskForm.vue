@@ -108,6 +108,7 @@ onMounted(() => {
 const loadingData = ref<boolean>(true)
 
 const setExistingTask = async () => {
+  setDefaultOwnerAndRequester()
   if (!props.task) return
   const { name, description, priority, dueDate } = props.task.attributes
   const { requester, owner } = props.task.relationships
@@ -145,6 +146,7 @@ const emits = defineEmits(['deactivate'])
 
 import { useCurrentUserStore } from '@/stores/currentUserStore'
 const setDefaultOwnerAndRequester = () => {
+  if (props.task) return
   const currentUserId = useCurrentUserStore().currentUser.id
   data.value.requester_id = currentUserId
   data.value.owner_id = currentUserId
@@ -188,7 +190,6 @@ const updateATask = () => {
 }
 
 const createATask = () => {
-  setDefaultOwnerAndRequester()
   const params = data.value
   const endpoint = `/api/v1/houses/${currentHouseSlug.value}/tasks`
   $securedAxios
