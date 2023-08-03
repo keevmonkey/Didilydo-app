@@ -1,7 +1,6 @@
 <template>
   <div>
-    <v-list-item title="Other Tenants" subtitle="people living in here" />
-
+    <app-section-header title="Other Tenants" subtitle="people living in here" text-color="info" />
     <v-list>
       <v-list-item v-for="user in users" :key="user.id">
         <template #prepend>

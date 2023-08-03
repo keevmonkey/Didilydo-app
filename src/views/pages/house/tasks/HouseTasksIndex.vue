@@ -12,15 +12,7 @@
     <v-list>
       <div v-for="task in tasks" :key="task.id">
         <TaskItem :task="task" @toggleEditTask="setAndEditTask(task)" />
-        <v-divider />
       </div>
-
-      <v-list-item
-        title="A new task"
-        append-icon="mdi-plus"
-        @click="toggleActivateTheHouseTaskForm()"
-        variant="tonal"
-      />
     </v-list>
 
     <app-dialog

@@ -10,5 +10,14 @@ export default function useTaskMixin() {
     return color
   }
 
-  return { statusColor }
+  const priorityColor = (priority: string) => {
+    const color = {
+      low: 'lime',
+      normal: 'primary',
+      high: 'orange'
+    }[priority]
+    return color
+  }
+
+  return { statusColor, priorityColor }
 }

@@ -1,21 +1,11 @@
 <template>
   <div>
-    <v-list-item title="Welcome to Didilydo" subtitle="Make my dreams come through..." class="mb-3">
-      <template #append>
-        <v-btn variant="text" icon color="secondary">
-          <v-icon>mdi-chevron-down</v-icon>
-          <v-menu activator="parent">
-            <v-list>
-              <v-list-item v-for="n in 3" :key="n">
-                <v-list-item-title>Hello {{ n }}</v-list-item-title>
-              </v-list-item>
-            </v-list>
-          </v-menu>
-        </v-btn>
-      </template>
-    </v-list-item>
-    <v-card variant="tonal">
-      <v-card-title> hello this is the sign in page </v-card-title>
+    <app-section-header
+      title="Welcome to Didilydo"
+      subtitle="Make my dreams come through..."
+      class="mb-3"
+    />
+    <v-card variant="tonal" color="indigo">
       <v-card-text>
         <v-form @submit.prevent @keyup.enter="signmeIn()">
           <v-text-field
@@ -46,7 +36,7 @@
     <v-divider class="my-4" />
 
     <div class="text-center my-4">
-      <p class="text-subtitle-2">Don't have an account yet?</p>
+      <p class="text-subtitle-1">Don't have an account yet?</p>
       <v-btn variant="text" color="accent" to="/auth/signup"> Sign Up </v-btn>
     </div>
   </div>

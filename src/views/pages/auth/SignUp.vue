@@ -1,7 +1,7 @@
 <template>
   <div>
+    <app-section-header title="Signup to Didilydo" subtitle="The Best home app ..." />
     <v-card variant="tonal">
-      <v-card-title> Signup an account with Didilydo today! </v-card-title>
       <v-card-text>
         <v-form @submit.prevent @keyup.enter="signmeUp()">
           <v-text-field
@@ -62,21 +62,18 @@
         </v-form>
       </v-card-text>
 
-      {{ validated }}
-
       <v-card-actions class="d-flex justify-center">
         <v-btn variant="elevated" color="primary" :disabled="!validated" @click="signmeUp()"
           >Sign Up</v-btn
         >
       </v-card-actions>
-
-      <v-divider class="my-4" />
-
-      <div class="text-center my-4">
-        <p class="text-subtitle-2">Already have an account?</p>
-        <v-btn variant="text" color="accent" to="/auth/signin"> Sign In </v-btn>
-      </div>
     </v-card>
+    <v-divider class="my-4" />
+
+    <div class="text-center my-4">
+      <p class="text-subtitle-1">Already have an account?</p>
+      <v-btn variant="text" color="accent" to="/auth/signin"> Sign In </v-btn>
+    </div>
   </div>
 </template>
 

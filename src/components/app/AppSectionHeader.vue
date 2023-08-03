@@ -1,7 +1,7 @@
 <template>
   <v-list-item class="py-3" :class="[textColorClass, bgColorClass]">
     <template v-if="icon"> </template>
-    <v-list-item-title class="font-weight-bold text-h5">
+    <v-list-item-title class="font-weight-bold text-h6">
       {{ title }}
     </v-list-item-title>
     <v-list-item-subtitle v-if="subtitle">

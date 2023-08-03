@@ -29,17 +29,17 @@ const router = createRouter({
         {
           path: 'dashboard',
           name: 'house-dashboard',
-          component: () => import('@/views/pages/house/dashboard/DashboardIndex.vue')
+          component: () => import('@/views/pages/house/dashboard/HouseDashboardIndex.vue')
         },
         {
           path: 'finances',
           name: 'house-finances',
-          component: () => import('@/views/pages/house/finances/FinancesIndex.vue')
+          component: () => import('@/views/pages/house/finances/HouseFinancesIndex.vue')
         },
         {
           path: 'tasks',
           name: 'house-tasks',
-          component: () => import('@/views/pages/house/tasks/TasksIndex.vue')
+          component: () => import('@/views/pages/house/tasks/HouseTasksIndex.vue')
         }
       ]
     },
@@ -50,12 +50,12 @@ const router = createRouter({
         {
           path: 'dashboard',
           name: 'account-dashboard',
-          component: () => import('@/views/pages/account/dashboard/DashboardIndex.vue')
+          component: () => import('@/views/pages/account/dashboard/AccountDashboardIndex.vue')
         },
         {
           path: 'tasks',
           name: 'account-tasks',
-          component: () => import('@/views/pages/account/tasks/TasksIndex.vue')
+          component: () => import('@/views/pages/account/tasks/AccountTasksIndex.vue')
         }
       ]
     },

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-list-item class="py-3 mb-3">
+    <v-list-item class="mb-3">
       <template #prepend>
         <v-avatar>
           <app-image :src="currentHouseAvatar" :placeholder="currentHouseName" :cover="false" />
@@ -14,9 +14,7 @@
 
     <DashboardOverview />
 
-    <v-divider class="my-3" />
-
-    <DashboardUsersList />
+    <HouseUsersList />
 
     <v-divider class="my-3" />
 
@@ -32,7 +30,7 @@
 </template>
 
 <script setup lang="ts">
-import DashboardUsersList from './components/DashboardUsersList.vue'
+import HouseUsersList from './components/HouseUsersList.vue'
 import DashboardOverview from './components/DashboardOverview.vue'
 
 import { useRoute } from 'vue-router'

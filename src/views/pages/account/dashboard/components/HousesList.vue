@@ -1,8 +1,7 @@
 <template>
   <div>
-    <v-list-item>
-      <v-list-item-title class="font-weight-bold text-overline">Your Houses</v-list-item-title>
-      <template #append>
+    <app-section-header title="Houses" subtitle="Take a look into a house" text-color="indigo">
+      <template #actions>
         <v-btn
           variant="text"
           @click="toggleActivateTheHouseForm()"
@@ -10,7 +9,7 @@
           text="new"
         />
       </template>
-    </v-list-item>
+    </app-section-header>
     <v-card variant="tonal" color="secondary" class="py-4">
       <v-list-item v-for="house in houses" :key="house.id">
         <template #prepend>
