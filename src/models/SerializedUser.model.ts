@@ -9,6 +9,7 @@ export interface SerializedUser {
 export type UserAttributes = {
   email: string
   name: string
+  phoneNumber: string
   passwordResetSentAt: string | undefined | null
   meta: UserMeta | undefined | null
   settings: UserSettings | undefined | null

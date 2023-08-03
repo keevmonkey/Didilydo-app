@@ -1,16 +1,22 @@
 <template>
   <div :class="themeClass">
-    <router-view v-slot="{ Component }">
-      <transition name="fade-on-spot" mode="out-in">
-        <component :is="Component" />
-      </transition>
-    </router-view>
+    <template v-if="loadingData">
+      <v-progress-circular indeterminate></v-progress-circular>
+    </template>
+
+    <template v-else>
+      <router-view v-slot="{ Component }">
+        <transition name="fade-on-spot" mode="out-in">
+          <component :is="Component" />
+        </transition>
+      </router-view>
+    </template>
   </div>
 </template>
 
 <script setup lang="ts">
 import { RouterView, useRouter, useRoute } from 'vue-router'
-import { onMounted, computed } from 'vue'
+import { onMounted, computed, ref } from 'vue'
 import { useSessionStore } from './stores/sessionStore'
 import { useTheme } from 'vuetify/lib/framework.mjs'
 import useLocalSession from './composables/useLocalSession'
@@ -27,7 +33,9 @@ const router = useRouter()
 const route = useRoute()
 const sessionStore = useSessionStore()
 
+const loadingData = ref<boolean>(true)
 onMounted(async () => {
+  loadingData.value = true
   console.log('sessionExpired', route.query.sessionExpired)
   if (route.query.sessionExpired == 'true') {
     await clearSession()
@@ -41,6 +49,7 @@ onMounted(async () => {
     } else {
       redirectToSignIn()
     }
+    loadingData.value = false
   }
 })
 
